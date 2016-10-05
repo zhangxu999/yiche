@@ -6,14 +6,10 @@ import  json
 class YicheSpider(scrapy.Spider):
     name = "yiche"
     domain = "http://car.bitauto.com/"
-    def start_requsests(self):
-        print 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-        urls = ['http://api.car.bitauto.com/CarInfo/getlefttreejson.ashx?tagtype=chexing']
-        for url in urls:
-            yield scrapy.Request(url=url,callback =self.parse_chexing)
+    start_urls = ['http://api.car.bitauto.com/CarInfo/getlefttreejson.ashx?tagtype=chexing']
 
-    def parse_chexing(self,response):
-        print '--------', response.body[:30],'------------'
+    def parse(self,response):
+        print '--------', response.body[:30], '------------'
         logging.log(logging.INFO,response.body[:20])
         filename = "chexing.csv"
         chexing = fixjson(response.body[14:-1])
@@ -22,12 +18,15 @@ class YicheSpider(scrapy.Spider):
             f.write(json2csv_chexing(chexing))
         self.log('Save file %s'%filename)
         mainBrand = chexing_json['brand']
+        
+
         for letter in mainBrand:
             for car in mainBrand[letter]:
                 url = car['url']
                 request = scrapy.Request(url=(self.domain+url), callback=self.parse_chexing2)
                 logging.log(logging.DEBUG, (self.domain+url))
                 request.meta['mb'] = car['name']
+                request.meta['store'] = f
                 yield  request
 
     def parse_chexing2(self, response):

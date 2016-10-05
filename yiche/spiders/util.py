@@ -55,7 +55,7 @@ def json2csv_chexing(chexing):
 
 
 def json2csv_chexing3(chexing):
-
+    ret = ''
     data = json.loads(chexing)
     logging.log(logging.DEBUG,len(data))
     for car in data:
