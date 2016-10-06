@@ -54,13 +54,14 @@ def json2csv_chexing(chexing):
     return ret.encode('utf-8')
 
 
-def json2csv_chexing3(chexing):
+def json2csv_chexing3(chexing,mb):
     ret = ''
     data = json.loads(chexing)
     logging.log(logging.DEBUG,len(data))
     for car in data:
-
+        ret += ('"' + mb + '",')
         for feature in car:
+
             ret += ','.join(map(lambda x: '"'+str(x)+'"', feature))
             ret+=','
         ret += '\n'
