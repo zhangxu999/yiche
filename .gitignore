@@ -1,8 +1,8 @@
-<<<<<<< HEAD
+
 *.pyc
 .idea
 sftp-config.json
-=======
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -92,4 +92,3 @@ ENV/
 
 # Rope project settings
 .ropeproject
->>>>>>> origin/master
