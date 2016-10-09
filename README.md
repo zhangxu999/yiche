@@ -7,6 +7,7 @@
   * python2(2.7或以上)
   * scrapy 1.2.0
   * scrapy-redis 0.6.3
+  * redis
 
 ##输入输出
   汽车数据爬取初始url: http://api.car.bitauto.com/CarInfo/getlefttreejson.ashx?tagtype=chexing
